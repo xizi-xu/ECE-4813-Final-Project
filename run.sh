@@ -1,1 +1,1 @@
-python mrsample.py ex_news2.csv > happy_greater_than_0.txt
+python mrsample.py Flume.1428955173649.csv -q
