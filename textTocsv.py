@@ -6,6 +6,7 @@ txt_file = r"result.txt"
 in_txt = open(txt_file, "r")
 
 everything = []
+
 for line in in_txt:
 	one_hr = []
 	line = line.strip('[|\n|]')
@@ -18,7 +19,7 @@ for line in in_txt:
 	everything.append(one_hr)
 
 with open('Result.csv', 'wb') as csvfile:
-	mywriter = csv.writer(csvfile, delimiter='\t')
+	mywriter = csv.writer(csvfile)
 	mywriter.writerow(('time', 'total news', 'total score', 'highest score', 'h_title', 'h_link', 'lowest score', 'l_title', 'h_link'))
 	for line in everything:
 		mywriter.writerow(line)

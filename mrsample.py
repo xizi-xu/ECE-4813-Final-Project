@@ -4,11 +4,12 @@ class MyMRJob(MRJob):
     def mapper(self, _, line):
         data=line.split(', ')
         score = int(float(data[0].strip()))
-        title = data[1].strip()
+        headline = data[1].strip()
         link = data[2].strip()
         site = data[3].strip()
+        #only need the timestamp upto hr
         timestamp = data[4].strip()[0:13]
-        yield timestamp, (score, title, link)
+        yield timestamp, (score, headline, link)
 
 
     # def combiner(self, key, list_of_values):
@@ -21,10 +22,10 @@ class MyMRJob(MRJob):
         temp_count = 0
         temp_tot_score = 0
         temp_happiest_score = 0
-        temp_happiest_title = ""
+        temp_happiest_headline = ""
         temp_happiest_link = ""
         temp_saddest_score = 0
-        temp_saddest_title = ""
+        temp_saddest_headline = ""
         temp_saddest_link = ""
 
         for temp in list_of_values:
@@ -33,15 +34,15 @@ class MyMRJob(MRJob):
             #find the highest score news
             if temp_happiest_score < temp[0]:
                 temp_happiest_score = temp[0]
-                temp_happiest_title = temp[1]
+                temp_happiest_headline = temp[1]
                 temp_happiest_link = temp[2]
             #find the lowest score news
             if temp_saddest_score > temp[0]:
                 temp_saddest_score = temp[0]
-                temp_saddest_title = temp[1]
+                temp_saddest_headline = temp[1]
                 temp_saddest_link = temp[2]
 
-        yield (key, temp_count, temp_tot_score) , (temp_happiest_score, temp_happiest_title, temp_happiest_link, temp_saddest_score, temp_saddest_title, temp_saddest_link)
+        yield (key, temp_count, temp_tot_score) , (temp_happiest_score, temp_happiest_headline, temp_happiest_link, temp_saddest_score, temp_saddest_headline, temp_saddest_link)
 
 
     # def steps(self):
