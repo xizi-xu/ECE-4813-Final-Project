@@ -31,6 +31,7 @@ class MyMRJob(MRJob):
                     useful = False
                     break
             if useful:
+                #emit all the 2 words phrases with their headlines
                 yield phrase[0] + ' '+ phrase[1], headline
     
     def reducer1(self, key, list_of_values):
@@ -39,10 +40,12 @@ class MyMRJob(MRJob):
         for temp in list_of_values:
             #remove duplicated news from RSS 
             if not temp in titles:
+                #increment count for every repeated phrase and store its headline
                 temp_count += 1
                 titles.append(temp)
 
         if temp_count > 10:
+            #emit phrases with their counts and headline arrays if it appears 10+ times
             yield temp_count, (key, titles)
 
     def steps(self):
