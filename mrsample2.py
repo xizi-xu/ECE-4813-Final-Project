@@ -1,3 +1,7 @@
+"""
+    Find the most common 2 words phrases in all the headlines
+"""
+
 from mrjob.job import MRJob
 from mrjob.job import MRStep
 import string

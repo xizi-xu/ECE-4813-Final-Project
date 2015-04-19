@@ -1,3 +1,7 @@
+"""
+    Define the total sentiment analysis score of news per hour
+    Find the news with highest and lowest score as well
+"""
 from mrjob.job import MRJob
 
 class MyMRJob(MRJob):
