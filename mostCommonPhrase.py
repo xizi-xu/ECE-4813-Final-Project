@@ -64,6 +64,10 @@ class MyMRJob(MRJob):
         totalSentiment = 0.0
         list_of_links = []
         for item in list_of_values:
+            #Skip if the link has already been processed
+            if item[2] in list_of_links:
+                continue
+
             #Add count
             totalCount = totalCount + item[0]
             #Add sentiment
