@@ -9,13 +9,14 @@ everything = []
 
 for line in in_txt:
 	one_hr = []
+	# remove punctuation 
 	line = line.strip('[|\n|]')
 	line = re.split(']	|, ',line)
 
 	for part in line:
 		part = part.strip('""|[')
 		one_hr.append(part)
-	# print one_hr
+	# let each hr's info be a row
 	everything.append(one_hr)
 
 with open('Result.csv', 'wb') as csvfile:

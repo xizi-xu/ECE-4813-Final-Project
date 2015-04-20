@@ -6,24 +6,17 @@ txt_file = r"resultPaul.txt"
 in_txt = open(txt_file, "r")
 
 everything = []
-# one_hr = []
-
-# line = in_txt.readline()
-# line = line.strip('[|\n|]')
-# line = re.split(', ',line)
-# for part in line:
-# 	part = part.strip('\"|[|\'')
-# 	one_hr.append(part)
-
 
 for line in in_txt:
 	one_phrase = []
+	# remove punctuation 
 	line = line.strip('[|\n|]')
 	line = re.split(', ',line)
+
 	for part in line:
 		part = part.strip('\"|[|\'')
 		one_phrase.append(part)
-	# print one_hr
+	# let each phrase's info be a row
 	everything.append(one_phrase)
 
 with open('ResultPaul.csv', 'wb') as csvfile:

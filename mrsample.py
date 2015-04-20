@@ -1,6 +1,13 @@
+"""
+    Define the total sentiment analysis score of news per hour
+    Find the news with highest and lowest score as well
+"""
 from mrjob.job import MRJob
 
 class MyMRJob(MRJob):
+    def init_mapper(self):
+        self.healines = []
+
     def mapper(self, _, line):
         data=line.split(', ')
         score = int(float(data[0].strip()))
@@ -9,13 +16,13 @@ class MyMRJob(MRJob):
         site = data[3].strip()
         #only need the timestamp upto hr
         timestamp = data[4].strip()[0:13]
-        yield timestamp, (score, headline, link)
+
+        if not headline in self.healines:
+            self.healines.append(headline)
+            yield timestamp, (score, headline, link)
 
 
     # def combiner(self, key, list_of_values):
-
-
-    # def init_reducer(self):
 
 
     def reducer(self, key, list_of_values):
@@ -45,8 +52,8 @@ class MyMRJob(MRJob):
         yield (key, temp_count, temp_tot_score) , (temp_happiest_score, temp_happiest_headline, temp_happiest_link, temp_saddest_score, temp_saddest_headline, temp_saddest_link)
 
 
-    # def steps(self):
-    #     return [self.mr(mapper=self.mapper, combiner=self.combiner, reducer_init=self.init_reducer, reducer=self.reducer)]
+    def steps(self):
+        return [self.mr(mapper_init=self.init_mapper, mapper=self.mapper, reducer=self.reducer)]
 
         
 if __name__ == '__main__':
