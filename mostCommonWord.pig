@@ -28,7 +28,7 @@ C = group words by wordTuple;
 wordCount = foreach C generate COUNT(words) as count, group as word;
 OUT = ORDER wordCount by count DESC;
 OUT = LIMIT OUT 50;
-STORE OUT into 'mostCommonWordPig.txt';
+STORE OUT into 'MostCommonWordPig';
 
 /*
 filteredOut = FILTER OUT by word != words_to_ignore.$0;
