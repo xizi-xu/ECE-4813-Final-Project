@@ -14,10 +14,11 @@ class MyMRJob(MRJob):
         headline = data[1].strip()
         link = data[2].strip()
         site = data[3].strip()
-        #only need the timestamp upto hr
+        # only need the timestamp upto hr
         timestamp = data[4].strip()[0:13]
 
         if not headline in self.healines:
+            # remove duplicated headlines
             self.healines.append(headline)
             yield timestamp, (score, headline, link)
 
