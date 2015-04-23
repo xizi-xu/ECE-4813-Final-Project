@@ -1,4 +1,4 @@
-python mrsample.py test1.csv >result.txt  -q
-python textTocsv.py
+python timeline.py test1.csv >result.txt  -q
+python textToCsvTL.py
 python mostCommonPhrase.py test1.csv >resultPaul.txt  -q
-python textTocsv2.py
+python textToCsvPhrase.py
